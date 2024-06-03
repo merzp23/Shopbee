@@ -3,7 +3,7 @@ let dropdown = document.getElementById('dropdown');
 let search = document.querySelector('.header .nav .search_box_hide');
 document.querySelector('#search-btn').onclick = () =>{
    search.classList.toggle('active');
-   dropdown.classList.remmove('show');
+   dropdown.classList.remove('show');
 }
 
 /*=============== SHOW CART ===============*/
@@ -53,52 +53,39 @@ function scrollUp(){
 }
 window.addEventListener('scroll', scrollUp);
 
-/*====================================================================================================================*/
-
 /*================================================== TABS -======================================*/
-var tabWrap = document.querySelector('.tab-wrap');
-if (tabWrap) {
-    tabWrap.addEventListener('click', function(event) {
-        if (event.target.classList.contains('item')) {
-            switchTab(event.target);
-        }
-    });
-
-    var firstTabNavItem = tabWrap.querySelector('.tab-nav .item:first-child');
-    firstTabNavItem.click();
-
-    function switchTab(clickedTab) {
-        var currentTab = clickedTab,
-            tabWrapper = currentTab.closest('.tab-wrap'),
-            rel = currentTab.getAttribute('rel'),
-            visibleContent = tabWrapper.querySelector('.' + rel),
-            contentHeight;
-
-        tabWrapper.querySelectorAll('.tab-nav .item').forEach(function(item) {
-            item.classList.remove('active');
-        });
-        currentTab.classList.add('active');
-
-        tabWrapper.querySelectorAll('.visible-content').forEach(function(content) {
-            content.classList.remove('visible-content');
-        });
-        visibleContent.classList.add('visible-content');
-
-        contentHeight = visibleContent.offsetHeight;
-        tabWrapper.querySelector('.tabs-content').style.height = contentHeight + 'px';
+if($('.tab-wrap' )[0] ){
+    $('.tab-wrap' )
+    .on('click', '.tab-nav .item', switchTab )
+    .find( '.tab-nav .item:first-child' ).trigger( 'click' );
+ 
+    function switchTab( event ){
+       var curentTab = $( this ),
+       tabWrapper = $( event.delegateTarget ),
+       visibleContent = $( '.' + curentTab.attr('rel') ),
+       contentHeight;
+ 
+       $( '.active', tabWrapper ).removeClass( 'active' );
+       curentTab.addClass( 'active' );
+ 
+       $( '.visible-content', tabWrapper ).removeClass( 'visible-content' );
+       visibleContent.addClass( 'visible-content' );
+ 
+       contentHeight = visibleContent.height();
+       $( '.tabs-content', tabWrapper ).height( contentHeight );
     }
-
-    window.addEventListener('resize', resizeTab);
-
-    function resizeTab() {
-        var visibleContents = tabWrap.querySelectorAll('.tab.visible-content');
-        setTimeout(function() {
-            visibleContents.forEach(function(content) {
-                var contentHeight = content.offsetHeight,
-                    tabsContent = content.closest('.tabs-content');
-
-                tabsContent.style.height = contentHeight + 'px';
-            });
-        }, 700);
+ 
+    $( window ).on( 'resize.myTemplate' , resizeTab );
+ 
+    function resizeTab( event ){
+       var visibleContent = $( '.tab.visible-content' );
+       setTimeout(function(){
+          visibleContent.each( function() {
+             var contentHeight = $( this ).outerHeight(true),
+                   tabsContent = $( this ).parents( '.tabs-content' );
+ 
+             tabsContent.height( contentHeight );
+          } );
+       }, 700);
     }
-}
+ }
