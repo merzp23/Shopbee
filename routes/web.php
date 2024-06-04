@@ -46,5 +46,7 @@ Route::get('/orders', [App\Http\Controllers\admin\AdminController::class, 'Order
 
 
 use App\Http\Controllers\bookDetailController;
-
+use App\Http\Controllers\bookDetailCustomerController;
 Route::get('/bookDetail/{book_id}', [App\Http\Controllers\bookDetail\bookDetailController::class, 'bookDetail']);
+Route::get('/bookDetail/{customer_id}/{book_id}', [App\Http\Controllers\bookDetail\bookDetailCustomerController::class, 'bookDetailCustomer']);
+Route::post('/insert-rating', [App\Http\Controllers\bookDetail\bookDetailCustomerController::class, 'insert_rating']);
