@@ -9,4 +9,9 @@ class book extends Model
 {
     use HasFactory;
     protected $table = 'book';
+    
+    public function cartHas()
+    {
+        return $this->belongsTo(CartHas::class, 'BOOK_ID', 'BOOK_ID');
+    }
 }
