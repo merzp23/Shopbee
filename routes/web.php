@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+require __DIR__ . '/payment.php';
+
 Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/login',[App\Http\Controllers\login\LoginController::class,'logon'])->name('login');
 Route::post('/login',[App\Http\Controllers\login\LoginController::class,'postLogin'])->name('post.login');
