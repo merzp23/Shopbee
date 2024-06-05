@@ -29,20 +29,21 @@ class PaymentController extends Controller
         $customer = Cart::where('CART_ID', $cartId)->first()->customer;
         $cartHas = CartHas::where('CART_ID', $cartId)->get();
 
-        $errors = Order::saveFromRequest($request);
+        $order = Order::newDefault();
+
+        $errors = $order->saveFromRequest($request);
 
         if (!$errors->isEmpty()) {
-            return response()->view('payment.index', [
+            return response()->view('payment.form', [
+                'order' => $order,
+                'errors' => $errors,
                 'cartHas' => $cartHas,
                 'customer' => $customer,
                 'cartId' => $cartId,
             ], 400);
         }
 
-        $url = '/'; // Thay đổi đường dẫn theo nhu cầu của bạn
-
         return response()->json([
-            'url' => $url,
             'status' => "OK",
             'message' => "Đặt hàng thành công!"
         ], 200);

@@ -7,6 +7,15 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+
+      <!--=============== BOOTSTRAP ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!--=============== BOXICONS ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+          
+    <!--=============== CSS ===============--> 
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         body {
             background-color: #ffffff;
@@ -77,7 +86,7 @@
 
   <style>
     .spinner-container {
-        display: none; /* Ban đầu ẩn spinner */
+        display: none;
         position: fixed;
         top: 50%;
         left: 50%;
@@ -91,7 +100,7 @@
         border-radius: 50%;
         border: 4px solid #f3f3f3;
         border-top: 4px solid #3498db;
-        animation: spin 1s linear infinite; /* Sử dụng animation CSS */
+        animation: spin 1s linear infinite;
     }
 
     @keyframes spin {
@@ -168,101 +177,7 @@
         $paymentFormUniqId = 'payment_form_' . uniqId();
     @endphp
     <form form-data="{{ $paymentFormUniqId }}" class="billing-data">
-    @csrf
-    <input type="hidden" name="cart_id" value="{{ $cartId }}">
-    <div class="container mt-4 mb-4">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Thông tin thanh toán</h2>
-                <br>
-                <div class="form-outline">
-                    <label class="required fs-6 fw-bold mb-2">Tên khách hàng</label>
-                    <input type="text" class="bg-secondary text-white form-control mb-3" readonly value="{{ $customer->LAST_NAME . " " . $customer->FIRST_NAME }}" placeholder="Tên">
-                </div>
-
-                <div class="form-outline">
-                    <label class="required fs-6 fw-bold mb-2">Địa chỉ</label>
-                    <input type="text" name="ADDRESS" value="{{ $customer->ADDRESS }}" class="form-control mb-3" placeholder="Địa chỉ">
-                </div>
-
-                <div class="form-outline">
-                    <label class="required fs-6 fw-bold pe-none mb-2">Ngày đặt hàng</label>
-                    <input type="text" name="ORDER_DATE" class="bg-secondary text-white form-control mb-3" placeholder="Ngày thanh toán" value="<?php echo date('Y-m-d H:i:s'); ?>">
-                </div>
-
-                <h2>Phương thức thanh toán</h2>
-
-                <div class="payment-methods">
-                    <div class="form-check">
-                        <input type="radio" name="PAYMENT_TYPE" value="cod" id="cod" class="form-check-input">
-                        <label for="cod">Thanh toán lúc nhận hàng</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" name="PAYMENT_TYPE" value="card" id="card" class="form-check-input">
-                        <label for="card">Thẻ tín dụng</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" name="PAYMENT_TYPE" value="paypal" id="paypal" class="form-check-input">
-                        <label for="paypal">PayPal</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" name="PAYMENT_TYPE" value="momo" id="momo" class="form-check-input">
-                        <label for="momo">MoMo</label>
-                    </div>
-                </div>
-
-                <div class="form-outline">
-                  <label class="required fs-6 fw-bold pe-none mb-2">Loại thẻ thanh toán nếu thanh toán bằng thẻ (Vd: Vietinbank)</label>
-                  <input type="text" name="PROVIDER" class="form-control mb-3" placeholder="Thẻ thanh toán">
-              </div>
-            </div>
-            
-            <div class="col-md-6">
-                <h2>Đơn hàng của bạn</h2>
-                <div class="order-summary">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Tên sách</th>
-                                <th>Miêu tả</th>
-                                <th>Giá tiền</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $total = 0;
-
-                                foreach($cartHas as $item) {
-                                    $total += \App\Models\book::where('BOOK_ID', $item->BOOK_ID)->first()->PRICE;
-                                }
-                                
-                            @endphp
-
-                            @foreach ($cartHas as $item)
-                                <tr>
-                                    <td>{{ \App\Models\book::where('BOOK_ID', $item->BOOK_ID)->first()->NAME }}</td>
-                                    <td>{{ \App\Models\book::where('BOOK_ID', $item->BOOK_ID)->first()->DESCRIPTION }}</td>
-                                    <td>{{ \App\Helpers\Functions::formatNumber(\App\Models\book::where('BOOK_ID', $item->BOOK_ID)->first()->PRICE) }}đ</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Tổng giá</th>
-                                <th class="d-flex justify-content-center align-items-center">
-                                    <input type="text" class="form-control border-0 text-center py-o my-0 pe-5" readonly name="TOTAL_PRICE" value="{{ \App\Helpers\Functions::formatNumber($total) }}đ">
-                                </th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-
-            <div class="col-md-12 mt-5 d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary mt-3">Thanh toán</button>
-            </div>
-        </div>
-    </div>
+      @include('payment.form')
     </form>
 
     <script>
@@ -309,8 +224,9 @@
                         window.location.href = '/';
                       }, 700);
                   }).fail(res => {
-                      console.error(res);
                       _this.showErrorMessage();
+
+                      _this.self().html(res.responseText)
 
                       setTimeout(() => {
                         _this.hideErrorMessage();
@@ -441,4 +357,9 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <!--=============== MAIN JS ===============-->
+  <script src="assets/js/main.js"></script>
+  
+  <!--=============== BOOSTRAP ===============--> 
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>

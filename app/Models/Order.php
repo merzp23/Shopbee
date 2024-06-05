@@ -24,6 +24,16 @@ class Order extends Model
         'PAYMENT_TYPE',
         'PROVIDER',
         'CUSTOMER_ID',
+        'recipe',
+        'email',
+        'phone_number',
+        'province',
+        'city',
+        'town',
+        'ward',
+        'shipping_address',
+        'voucher_code',
+        'notes',
     ];
 
     public function orderItems()
@@ -45,30 +55,45 @@ class Order extends Model
         return $totalPrice;
     }
 
-    public static function saveFromRequest($request)
+    public static function newDefault()
+    {
+        $order = new self();
+        $order->PAYMENT_STATUS = self::PAYMENT_STATUS_UNPAID;
+        
+        return $order;
+    }
+
+    public function saveFromRequest($request)
     {
         $validator = Validator::make($request->all(), [
             'ORDER_DATE' => 'required',
             'ADDRESS' => 'required',
             'TOTAL_PRICE' => 'required',
             'PAYMENT_TYPE' => 'required',
+            'recipe' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'town' => 'required',
+            'ward' => 'required',
+            'shipping_address' => 'required',
+            'voucher_code' => 'required',
         ]);
     
-        $order = new self();
-
-        $order->fill($request->all());
+        $this->fill($request->all());
 
         $cartId = $request->cart_id;
         $customer = Cart::where('CART_ID', $cartId)->first()->customer;
 
-        $order->CUSTOMER_ID = $customer->CUSTOMER_ID;
-        $order->TOTAL_PRICE = Functions::convertStringPriceToNumber($request->TOTAL_PRICE);
+        $this->CUSTOMER_ID = $customer->CUSTOMER_ID;
+        $this->TOTAL_PRICE = Functions::convertStringPriceToNumber($request->TOTAL_PRICE);
 
         if ($validator->fails()) {
             return $validator->errors();
         }
 
-        $order->save();
+        $this->save();
 
         return $validator->errors();
     }
