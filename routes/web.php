@@ -58,3 +58,12 @@ Route::post('/insert-rating', [App\Http\Controllers\bookDetail\bookDetailCustome
 /*=================HOME========================== */
 use App\Http\Controllers\homeController;
 Route::get('/', [homeController::class, 'home'])->name('home');
+
+
+// Profile
+use App\Http\Controllers\ProfileController;
+
+Route::get('/profile',[ProfileController::class,'index'])->name('profile');
+Route::get('/profile/myorder',[ProfileController::class,'listorder'])->name('listorder');
+Route::post('/profile/update/{id}',[ProfileController::class,'update']);
+Route::post('/profile/update_pass/{id}',[ProfileController::class,'updatePass']);
