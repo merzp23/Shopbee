@@ -1,7 +1,7 @@
 
 <link rel="stylesheet" href="{{asset('frontend/css/product_detail.css')}}">
 @extends('layout.user_MainStructure')
-@section('title', $book->NAME)
+@section('title', $books->NAME)
 @section('content')
     @if($books)
       <section class="intro py-5 mb-5">
