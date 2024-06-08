@@ -70,18 +70,34 @@ img{
 
 /*===============  HEADER ===============*/
 header{
-   background-color: var(--main-color);
-   position: sticky;
-   z-index: var(--z-fixed);
-   box-shadow: 0 2px 16px hsla(0, 0%, 0%, .15);
-   color: var(--white-color);
+    background-color: var(--main-color);
+        position: sticky;
+    top: 0;
+    z-index: var(--z-fixed);
+    box-shadow: 0 2px 16px hsla(0, 0%, 0%, .15);
+    color: var(--white-color);
 }
 
 .nav_brand{
-   color: var(--white-color);
-   font-family: var(--second-font);
+    color: var(--white-color);
+    font-family: var(--second-font);
+    a:hover{
+        text-decoration: none;
+        color:white;
+
+        h1{
+        }
+    }
 }
 
+.hihi:hover{
+    text-decoration: none;
+    color:white;
+
+    h1{
+        color:white; !important;
+    }
+}
 .search_box{
    position: relative;
    background-color: var(--light-bg);

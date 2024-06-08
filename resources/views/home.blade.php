@@ -9,7 +9,7 @@
             <div class="intro_text col-md-6 col-12">
                 <h1 class = "intro_title display-3 mb-3">Start a new adventure with Verbify's universe</h1>
                 <p class = "intro_subtitle h5 mb-3">Once upon a time, in a faraway kingdom, there lived a breathtakingly beautiful princess...</p>
-                <button class="more-btn">Explore more</button>
+               <a href="{{route('shop.index')}}"><button class="more-btn">Explore more</button></a>
             </div>
             <div class="intro_img col-md-6 col-12">
               <img src="{{asset('frontend/images/intro.png')}}" alt="img">
@@ -118,7 +118,7 @@
         <div class="sale-row row row-cols-1 row-cols-md-3">
           <div class="hotsale col">
             <div class="list_title">
-                <a href="#"><h3>HOT SALE</h3></a>
+                <a href="{{url('http://127.0.0.1:8000/shop?sort=Most+popular')}}"><h3>HOT SALE</h3></a>
               </div>
               <div class="list row row-cols-1 g-3">
                 @foreach ($booksHotSale as $book)
@@ -137,7 +137,7 @@
             </div>
           <div class="lastest col">
             <div class="list_title">
-              <a href="#"><h3>LASTEST</h3></a>
+              <a href="{{url('http://127.0.0.1:8000/shop?sort=Newest')}}"><h3>LASTEST</h3></a>
             </div>
             <div class="list row row-cols-1 g-3">
               @foreach ($booksLastest as $book)
@@ -160,7 +160,7 @@
         </div>
       </div>
     </section>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{asset('frontend/js/home.js')}}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

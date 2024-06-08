@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{asset('frontend/css/product_detail.css')}}">
 @extends('layout.user_MainStructure')
-@section('title', 'Book')
+@section('title', $book->NAME)
 @section('content')
     @if($book)
       <!--=============== INTRO ===============-->
@@ -89,11 +89,11 @@
                 @foreach ($booksSimilar as $bookSML)
                   <div class="col">
                     <div class="book_item">
-                        <a href="#"  class="book_img"><img src="{{$bookSML->IMAGE_LINK}}" alt="img"></a>
+                        <a href="{{route('book.detail',$book->BOOK_ID)}}" class="book_img"><img src="{{$bookSML->IMAGE_LINK}}" alt="img"></a>
                         <div class="book_info px-4 py-2">
-                          <div class="book_title fs-5"><a href="#">{{$bookSML->NAME}}</a></div>
+                          <div class="book_title fs-5"><a href="{{route('book.detail',$book->BOOK_ID)}}">{{$bookSML->NAME}}</a></div>
                           <div class="book_author fs-5">{{$bookSML->AUTHOR}}</div>
-                          <div class="book_price fs-5">{{$bookSML->PRICE}}</div>
+                          <div class="book_price fs-5">${{$bookSML->PRICE}}</div>
                         </div>
                       </div>
                   </div>

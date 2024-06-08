@@ -1,7 +1,7 @@
 
 <link rel="stylesheet" href="{{asset('frontend/css/product_detail.css')}}">
 @extends('layout.user_MainStructure')
-@section('title', 'Book')
+@section('title', $books->NAME)
 @section('content')
     @if($books)
       <section class="intro py-5 mb-5">
@@ -45,7 +45,7 @@
                 <input type="number" id="quantity" class="quantity-input col-4" value="1" min="1">
                 <button class="quantity-button col-4" id="increase">+</button>
             </div>
-            <div class="button">
+            <div class="button1">
                 <a href="{{route('login')}}">
               <button class="cart-btn col-5" style="margin-right: 1.5rem"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" viewBox="0 0 35 36" fill="none">
                   <path d="M15.3125 30.9585C16.5206 30.9585 17.5 29.9791 17.5 28.771C17.5 27.5629 16.5206 26.5835 15.3125 26.5835C14.1044 26.5835 13.125 27.5629 13.125 28.771C13.125 29.9791 14.1044 30.9585 15.3125 30.9585Z" fill="#FCFCFC"/>
@@ -92,7 +92,7 @@
                         <div class="book_info px-4 py-2">
                           <div class="book_title fs-5"><a href="#">{{$book->NAME}}</a></div>
                           <div class="book_author fs-5">{{$book->AUTHOR}}</div>
-                          <div class="book_price fs-5">{{$book->PRICE}}</div>
+                          <div class="book_price fs-5">${{$book->PRICE}}</div>
                         </div>
                       </div>
                   </div>
@@ -136,7 +136,7 @@
                       </div>
                     @endforeach
                   </div>
-                  <div class="reminder col">Only registered users can write reviews. <br>Please, <a href="#">login</a> or <a href="#">register</a></div>
+                  <div class="reminder col">Only registered users can write reviews. <br>Please, <a href="{{route('login')}}">login</a> or <a href="{{route('register')}}">register</a></div>
               </div>
               <hr class="hr3 mb-4">
 

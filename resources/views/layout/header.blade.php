@@ -6,7 +6,7 @@
 <header class="header container-fluid">
     <ul class="nav navbar container">
         <li>
-            <a href="{{route('home')}}" class="nav_brand">
+            <a href="{{route('home')}}" class="nav_brand hihi">
                 <h1 class = "display-5">Verbify</h1>
             </a>
         </li>
