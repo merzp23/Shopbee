@@ -11,10 +11,10 @@
 
                 </p>
                 <div class="icons footer_icons text-center fs-3">
-                    <a href="#" class="btn-facebook mx-1">
+                    <a href="{{url('https://www.facebook.com/khank.tran.3150')}}" class="btn-facebook mx-1">
                         <i class='bx bxl-facebook-circle'></i>
                     </a>
-                    <a href="#" class="btn-github mx-1">
+                    <a href="{{url('https://github.com/merzp23/Shopbee')}}" class="btn-github mx-1">
                         <i class='bx bxl-github'></i>
                     </a>
                     <a href="#" class="btn-figma mx-1">
@@ -51,13 +51,13 @@
 
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#">Home</a>
+                        <a href="{{route('home')}}">Home</a>
                     </li>
                     <li>
                         <a href="#">About us</a>
                     </li>
                     <li>
-                        <a href="#">Shop</a>
+                        <a href="{{route('shop.index')}}">Shop</a>
                     </li>
                     <li>
                         <a href="#">Contact</a>
